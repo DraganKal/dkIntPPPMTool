@@ -5,7 +5,7 @@ import ProjectItem from './Project/ProjectItem';
     render() {
         return (
             <div>
-                <h1>Welcome to the Dashboard</h1>
+                <h1 className="alert alert-warning">Welcome to the Dashboard</h1>
                 <ProjectItem />
                 <ProjectItem />
                 <ProjectItem />
