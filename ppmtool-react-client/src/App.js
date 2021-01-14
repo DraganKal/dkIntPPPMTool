@@ -3,7 +3,7 @@ import Dashboard from "./components/Dashboard";
 import Header from "./components/Layout/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import addProject from "./components/Project/addProject";
+import addProject from "./components/Project/AddProject";
 import { Provider } from "react-redux";
 import store from "./store";
 import { Component } from "react";
