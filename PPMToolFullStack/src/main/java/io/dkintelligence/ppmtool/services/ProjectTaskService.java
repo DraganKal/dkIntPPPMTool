@@ -9,6 +9,7 @@ import io.dkintelligence.ppmtool.repositories.ProjectRepository;
 import io.dkintelligence.ppmtool.repositories.ProjectTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.backoff.BackOff;
 
 import java.util.List;
 
@@ -53,4 +54,24 @@ public class ProjectTaskService {
 
         return projectTaskRepository.findByProjectIdentifierOrderByPriority(backlog_id);
     }
+
+    public ProjectTask findProjectTaskByProjectSequence(String backlog_id, String pt_id){
+
+        Backlog backlog = backlogRepository.findByProjectIdentifier(backlog_id);
+        if(backlog == null){
+            throw new ProjectNotFoundException("Project with id '" + backlog_id + "' does not exist");
+        }
+
+        ProjectTask projectTask = projectTaskRepository.findByProjectSequence(pt_id);
+        if(projectTask == null){
+            throw new ProjectNotFoundException("Project task with id '" + pt_id + "' not found");
+        }
+
+        if(!projectTask.getProjectIdentifier().equals(backlog_id)){
+            throw new ProjectNotFoundException("Project Task '" + pt_id + "' does not exist in project with id '" + backlog_id + "'");
+        }
+
+        return projectTask;
+    }
+
 }
