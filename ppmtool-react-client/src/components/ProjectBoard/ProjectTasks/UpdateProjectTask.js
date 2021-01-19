@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import {
   getProjectTask,
-  addProjectTask,
+  updateProjectTask,
 } from "../../../actions/backlogActions";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -81,15 +81,16 @@ class UpdateProjectTask extends Component {
       created_at: this.state.created_at,
     };
 
-    this.props.addProjectTask(
+    this.props.updateProjectTask(
       this.state.projectIdentifier,
+      this.state.projectSequence,
       updateProjectTask,
       this.props.history
     );
   }
 
   render() {
-    const { errors, summary, projectSequence, projectIdentifier } = this.state;
+    const { errors, projectIdentifier } = this.state;
 
     return (
       <div className="add-PBI">
@@ -104,7 +105,7 @@ class UpdateProjectTask extends Component {
               </Link>
               <h4 className="display-4 text-center">Update Project Task</h4>
               <p className="lead text-center">
-                Project Name: {this.state.projectIdentifier} | Project Task ID:{" "}
+                Project ID: {this.state.projectIdentifier} | Project Task ID:{" "}
                 {this.state.projectSequence}
               </p>
               <form onSubmit={this.onSubmit}>
@@ -185,7 +186,7 @@ class UpdateProjectTask extends Component {
 
 UpdateProjectTask.propTypes = {
   getProjectTask: PropTypes.func.isRequired,
-  addProjectTask: PropTypes.func.isRequired,
+  updateProjectTask: PropTypes.func.isRequired,
   project_task: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
 };
@@ -195,6 +196,6 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { getProjectTask, addProjectTask })(
+export default connect(mapStateToProps, { getProjectTask, updateProjectTask })(
   UpdateProjectTask
 );
