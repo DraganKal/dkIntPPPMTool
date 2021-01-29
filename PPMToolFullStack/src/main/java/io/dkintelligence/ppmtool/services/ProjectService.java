@@ -4,6 +4,7 @@ import io.dkintelligence.ppmtool.domain.Backlog;
 import io.dkintelligence.ppmtool.domain.Project;
 import io.dkintelligence.ppmtool.domain.User;
 import io.dkintelligence.ppmtool.exceptions.ProjectIdException;
+import io.dkintelligence.ppmtool.exceptions.ProjectNotFoundException;
 import io.dkintelligence.ppmtool.repositories.BacklogRepository;
 import io.dkintelligence.ppmtool.repositories.ProjectRepository;
 import io.dkintelligence.ppmtool.repositories.UserRepository;
@@ -43,24 +44,27 @@ public class ProjectService {
         }
     }
 
-    public Project findProjectByIdentifier(String projectId){
+    public Project findProjectByIdentifier(String projectId, String username){
         Project project = projectRepository.findByProjectIdentifier(projectId.toUpperCase());
         if(project == null){
             throw  new ProjectIdException("Project ID '" + projectId.toUpperCase() + "' doesnt exists");
         }
+        if(!project.getProjectLeader().equals(username)){
+            throw new ProjectNotFoundException("Project not found in your account");
+        }
+
+
+
         return project;
     }
 
-    public Iterable<Project> findAllProjects(){
-        return projectRepository.findAll();
+    public Iterable<Project> findAllProjects(String username){
+        return projectRepository.findAllByProjectLeader(username);
     }
 
-    public void deleteProjectByIdentifier(String projectId){
-        Project project = projectRepository.findByProjectIdentifier(projectId.toUpperCase());
-        if(project == null){
-            throw  new ProjectIdException("Cannot delete Project with Id '" + projectId.toUpperCase() + "'. This Project doesnt exist");
-        }
-        projectRepository.delete(project);
+    public void deleteProjectByIdentifier(String projectId, String username){
+
+        projectRepository.delete(findProjectByIdentifier(projectId, username));
     }
 
 }
