@@ -32,10 +32,8 @@ public class ProjectService {
         }
         try {
             User user = userRepository.findByUsername(username);
-
             project.setUser(user);
             project.setProjectLeader(user.getUsername());
-
             project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
             if(project.getId() == null){
                 Backlog backlog = new Backlog();
@@ -60,19 +58,17 @@ public class ProjectService {
         if(!project.getProjectLeader().equals(username)){
             throw new ProjectNotFoundException("Project not found in your account");
         }
-
-
-
         return project;
     }
 
     public Iterable<Project> findAllProjects(String username){
         return projectRepository.findAllByProjectLeader(username);
+
     }
 
     public void deleteProjectByIdentifier(String projectId, String username){
-
         projectRepository.delete(findProjectByIdentifier(projectId, username));
+
     }
 
 }

@@ -23,10 +23,8 @@ public class ProjectTask {
     @JoinColumn(name = "backlog_id", updatable = false, nullable = false)
     @JsonIgnore
     private Backlog backlog;
-
     @Column(updatable = false)
     private String projectIdentifier;
-
     private Date created_At;
     private Date update_At;
 
@@ -95,7 +93,6 @@ public class ProjectTask {
     }
     public Backlog getBacklog() {
         return backlog; }
-
     public void setBacklog(Backlog backlog) {
         this.backlog = backlog;
     }

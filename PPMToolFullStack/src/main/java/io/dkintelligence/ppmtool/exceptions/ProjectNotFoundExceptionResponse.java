@@ -11,7 +11,6 @@ public class ProjectNotFoundExceptionResponse {
     public String getProjectNotFound() {
         return ProjectNotFound;
     }
-
     public void setProjectNotFound(String ProjectNotFound) {
         this.ProjectNotFound = ProjectNotFound;
     }

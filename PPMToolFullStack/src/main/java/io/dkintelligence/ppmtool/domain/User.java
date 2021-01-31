@@ -18,7 +18,6 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Email(message = "Username needs to be an email")
     @NotBlank(message = "username is required")
     @Column(unique = true)
@@ -31,7 +30,6 @@ public class User implements UserDetails {
     private String confirmPassword;
     private Date created_At;
     private Date updated_At;
-
 //    OneToMany with Project
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
     private List<Project> projects = new ArrayList<>();
@@ -98,35 +96,30 @@ public class User implements UserDetails {
     }
 
 //  UserDetails interface methods
-
-
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
-
     @Override
     @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
-
     @Override
     @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
-
     @Override
     @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
     @Override
     @JsonIgnore
     public boolean isEnabled() {
         return true;
     }
+
 }
