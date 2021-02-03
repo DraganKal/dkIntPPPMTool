@@ -1,4 +1,5 @@
 package io.dkintelligence.ppmtool.domain;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class ProjectTask {
     private String acceptanceCriteria;
     private String status;
     private Integer priority;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date dueDate;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "backlog_id", updatable = false, nullable = false)
@@ -25,7 +27,9 @@ public class ProjectTask {
     private Backlog backlog;
     @Column(updatable = false)
     private String projectIdentifier;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date created_At;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date update_At;
 
     public ProjectTask() {
