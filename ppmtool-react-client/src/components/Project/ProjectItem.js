@@ -22,6 +22,7 @@ class ProjectItem extends Component {
               <h3>{project.projectName}</h3>
               <p>{project.description}</p>
             </div>
+
             <div className="col-md-4 d-none d-lg-block">
               <ul className="list-group">
                 <Link to={`/projectBoard/${project.projectIdentifier}`}>
@@ -45,6 +46,12 @@ class ProjectItem extends Component {
                   <i className="fa fa-minus-circle pr-1"> Delete Project</i>
                 </li>
               </ul>
+            </div>
+            <div className="col-3">
+              <p className="mx-auto">Start date: {project.start_date}</p>
+            </div>
+            <div className="col-3">
+              <p className="mx-auto">Estimated end date: {project.end_date}</p>
             </div>
           </div>
         </div>

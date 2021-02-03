@@ -19,7 +19,7 @@ public class ProjectTask {
     private String acceptanceCriteria;
     private String status;
     private Integer priority;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "backlog_id", updatable = false, nullable = false)
@@ -27,9 +27,9 @@ public class ProjectTask {
     private Backlog backlog;
     @Column(updatable = false)
     private String projectIdentifier;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date created_At;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date update_At;
 
     public ProjectTask() {
